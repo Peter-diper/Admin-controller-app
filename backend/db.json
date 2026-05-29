@@ -1,17 +1,14 @@
 {
   "users": [
     {
-      "id": 3,
+      "id": 1780056484636,
+      "name": "rasoolfada",
+      "email": "rasoolfada2@gmail.com"
+    },
+    {
+      "id": 1780059521612,
       "name": "Peter",
-      "email": "peter@example.com"
-    },
-    {
-      "id": 2,
-      "name": "John",
-      "email": "john@example.com"
-    },
-    {
-      "id": 1780044704045
+      "email": "rasoolfada2@gmail.com"
     }
   ]
 }
