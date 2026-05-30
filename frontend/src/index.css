@@ -3,3 +3,11 @@
 #root {
   @apply bg-slate-950 min-h-screen pt-10;
 }
+
+.active {
+  @apply font-medium  text-cyan-200;
+}
+
+@theme {
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+}

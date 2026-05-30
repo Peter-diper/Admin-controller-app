@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Input from "../components/ui/Input";
 import { editUser, getUser, queryClient } from "../http";
@@ -7,11 +7,13 @@ import Error from "../components/ui/Error";
 
 export default function AddUser() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: editUser,
     onSuccess: () => {
       queryClient.invalidateQueries();
+      navigate("/");
     },
     retry: false,
   });

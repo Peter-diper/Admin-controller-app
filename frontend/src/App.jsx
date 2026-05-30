@@ -4,18 +4,25 @@ import { queryClient } from "./http";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AddUserPage from "./page/AddUserPage";
 import EditPage from "./page/EditPage";
+import RootLayout from "./page/RootLayout";
 const router = createBrowserRouter([
   {
     path: "",
-    element: <UserPage />,
-  },
-  {
-    path: "add",
-    element: <AddUserPage />,
-  },
-  {
-    path: "users/:id/edit",
-    element: <EditPage />,
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <UserPage />,
+      },
+      {
+        path: "add",
+        element: <AddUserPage />,
+      },
+      {
+        path: "users/:id/edit",
+        element: <EditPage />,
+      },
+    ],
   },
 ]);
 export default function App() {

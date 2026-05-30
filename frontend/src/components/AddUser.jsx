@@ -21,7 +21,7 @@ export default function AddUser() {
   return (
     <form
       onSubmit={hanldeSubmit}
-      className="flex flex-col gap-28 justify-between"
+      className="flex flex-col gap-28 justify-between  bg-gray-400/30 p-5 rounded-2xl"
     >
       <div className="">
         <Input
