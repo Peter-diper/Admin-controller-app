@@ -94,17 +94,30 @@ export default function Users() {
 
   return (
     <div className="space-y-10">
-      {content}
       {users && (
-        <UserList users={users.data}>
-          {(item) => (
-            <div className="space-y-2">
-              <h2>{item.name}</h2>
-              <p>{item.email}</p>
+        <>
+          {users.data.length < 1 && (
+            <div className="flex flex-col gap-1.5">
+              <p className="animate-bounce">no users add yest ...</p>
+              <Link
+                className="bg-gray-600/50 px-3 text-xs mt-2 cursor-pointer rounded-xl max-w-30 text-center py-2"
+                to={"/add"}
+              >
+                ADD
+              </Link>
             </div>
           )}
-        </UserList>
+          <UserList users={users.data}>
+            {(item) => (
+              <div className="space-y-2">
+                <h2>{item.name}</h2>
+                <p>{item.email}</p>
+              </div>
+            )}
+          </UserList>
+        </>
       )}
+      {content}
     </div>
   );
 }
