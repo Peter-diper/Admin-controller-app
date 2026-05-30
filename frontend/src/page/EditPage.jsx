@@ -3,20 +3,28 @@ import { useParams } from "react-router-dom";
 
 import Input from "../components/ui/Input";
 import { editUser, getUser, queryClient } from "../http";
+import Error from "../components/ui/Error";
 
 export default function AddUser() {
   const { id } = useParams();
 
-  const { mutate, isPending } = useMutation({
+  const { mutate, isPending, isError, error } = useMutation({
     mutationFn: editUser,
     onSuccess: () => {
       queryClient.invalidateQueries();
     },
+    retry: false,
   });
 
-  const { data, isPending: pending } = useQuery({
+  const {
+    data,
+    isPending: pendingUserData,
+    isError: userIsError,
+    error: userError,
+  } = useQuery({
     queryKey: ["users", id],
     queryFn: ({ signal }) => getUser({ id, signal }),
+    retry: (failureCount) => failureCount < 3,
   });
 
   function hanldeSubmit(e) {
@@ -27,8 +35,15 @@ export default function AddUser() {
     mutate({ userData: data, userId: id });
     e.target.reset();
   }
-  if (pending) {
+  if (pendingUserData) {
     return <p>laoding...</p>;
+  } else if (userIsError) {
+    return (
+      <Error
+        title={"could not fetch data"}
+        message={userError?.message || "failde to get user data"}
+      />
+    );
   }
   return (
     <form
@@ -59,6 +74,12 @@ export default function AddUser() {
       >
         {isPending ? "Pending..." : "Submit"}
       </button>
+      {isError && (
+        <Error
+          title={"failde to edit data"}
+          message={error?.message || "faild message"}
+        />
+      )}
     </form>
   );
 }

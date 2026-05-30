@@ -9,8 +9,6 @@ export async function getUsers() {
   return responce;
 }
 export async function createUser(data) {
-  console.log(data);
-
   let url = "http://localhost:3000/users";
   const responce = await axios.post(url, data);
   return responce;
